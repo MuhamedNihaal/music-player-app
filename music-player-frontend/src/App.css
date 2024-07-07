@@ -1,0 +1,70 @@
+body {
+  background-color: #121212;
+  color: #ffffff;
+  font-family: 'Arial', sans-serif;
+}
+
+.sidebar {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.sidebar a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.sidebar a:hover {
+  color: #b3b3b3;
+}
+
+.sidebar .menu-item img,
+.sidebar .settings-item img {
+  width: 25px;
+  height: 25px;
+  margin-right: 10px;
+}
+
+.navbar {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.artist-header {
+  background-color: #1d1d1d;
+  color: #ffffff;
+}
+
+.artist-header img {
+  border-radius: 50%;
+}
+
+.songs-table {
+  background-color: #1d1d1d;
+}
+
+.songs-table th,
+.songs-table td {
+  padding: 15px;
+}
+
+.songs-table tr {
+  cursor: pointer;
+}
+
+.songs-table tr:hover {
+  background-color: #2a2a2a;
+}
+
+.songs-table tr.active {
+  background-color: #ff0000;
+}
+
+.now-playing {
+  background-color: #ff0000;
+  color: #ffffff;
+}
+
+.now-playing img {
+  border-radius: 10px;
+}
