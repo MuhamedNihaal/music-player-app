@@ -38,7 +38,7 @@ const DraggableSong = React.memo(({ song, index, moveSong, onClick }) => {
     >
       <td className="py-2 px-4">{index + 1}</td>
       <td className="py-2 px-4 flex items-center">
-        <img src={`http://localhost:5000/${song.coverImage}`} alt={song.title} className="mr-2 w-12 h-12" />
+        <img src={`https://music-player-app-up0l.onrender.com/${song.coverImage}`} alt={song.title} className="mr-2 w-12 h-12" />
         {song.title}
       </td>
       <td className="py-2 px-4">{song.playCount}</td>
@@ -62,7 +62,7 @@ export default function Widget() {
   const [playbackRate, setPlaybackRate] = useState(1.0);
 
   useEffect(() => {
-    axios.get('http://localhost:5000/songs')
+    axios.get('https://music-player-app-up0l.onrender.com/songs')
       .then(response => {
         setSongs(response.data);
         if (response.data.length > 0) {
@@ -74,7 +74,7 @@ export default function Widget() {
 
   useEffect(() => {
     if (currentSong) {
-      const audioSrc = `http://localhost:5000/${currentSong.audioSrc}`;
+      const audioSrc = `https://music-player-app-up0l.onrender.com/${currentSong.audioSrc}`;
       axios.get(audioSrc)
         .then(() => {
           audioRef.current.src = audioSrc;
@@ -168,26 +168,26 @@ export default function Widget() {
           {/* Branding */}
           <div>
             <div className="flex items-center mb-8">
-              <img src="http://localhost:5000/images/music.png" alt="DreamMusic Logo" className="mr-2" style={{ width: '40px', height: '40px' }} />
+              <img src="https://music-player-app-up0l.onrender.com/images/music.png" alt="DreamMusic Logo" className="mr-2" style={{ width: '40px', height: '40px' }} />
               <span className="text-xl font-bold">DreamMusic</span>
             </div>
             {/* Navigation */}
             <nav>
               <ul className="space-y-4">
                 <li className="flex items-center">
-                  <img src="http://localhost:5000/images/home.png" alt="Home Icon" className="mr-2" style={{ width: '25px', height: '25px' }} />
+                  <img src="https://music-player-app-up0l.onrender.com/images/home.png" alt="Home Icon" className="mr-2" style={{ width: '25px', height: '25px' }} />
                   <a href="#" className="hover:text-zinc-400">Home</a>
                 </li>
                 <li className="flex items-center">
-                  <img src="http://localhost:5000/images/trend.png" alt="Trends Icon" className="mr-2" style={{ width: '25px', height: '25px' }} />
+                  <img src="https://music-player-app-up0l.onrender.com/images/trend.png" alt="Trends Icon" className="mr-2" style={{ width: '25px', height: '25px' }} />
                   <a href="#" className="hover:text-zinc-400">Trends</a>
                 </li>
                 <li className="flex items-center">
-                  <img src="http://localhost:5000/images/library.png" alt="Library Icon" className="mr-2" style={{ width: '25px', height: '25px' }} />
+                  <img src="https://music-player-app-up0l.onrender.com/images/library.png" alt="Library Icon" className="mr-2" style={{ width: '25px', height: '25px' }} />
                   <a href="#" className="hover:text-zinc-400">Library</a>
                 </li>
                 <li className="flex items-center">
-                  <img src="http://localhost:5000/images/compass.png" alt="Discover Icon" className="mr-2" style={{ width: '25px', height: '25px' }} />
+                  <img src="https://music-player-app-up0l.onrender.com/images/compass.png" alt="Discover Icon" className="mr-2" style={{ width: '25px', height: '25px' }} />
                   <a href="#" className="hover:text-zinc-400">Discover</a>
                 </li>
               </ul>
@@ -197,11 +197,11 @@ export default function Widget() {
           <div>
             <ul className="space-y-4">
               <li className="flex items-center">
-                <img src="http://localhost:5000/images/settings.png" alt="Settings Icon" className="mr-2" style={{ width: '25px', height: '25px' }} />
+                <img src="https://music-player-app-up0l.onrender.com/images/settings.png" alt="Settings Icon" className="mr-2" style={{ width: '25px', height: '25px' }} />
                 <a href="#" className="hover:text-zinc-400">Settings</a>
               </li>
               <li className="flex items-center">
-                <img src="http://localhost:5000/images/logout.png" alt="Logout Icon" className="mr-2" style={{ width: '25px', height: '25px' }} />
+                <img src="https://music-player-app-up0l.onrender.com/images/logout.png" alt="Logout Icon" className="mr-2" style={{ width: '25px', height: '25px' }} />
                 <a href="#" className="hover:text-zinc-400">Logout</a>
               </li>
             </ul>
@@ -228,10 +228,10 @@ export default function Widget() {
             </div>
           </div>
           {/* Featured Artist */}
-          <div className="relative bg-[url('http://localhost:5000/images/michael-jackson.png')] bg-cover bg-center rounded-lg p-6 text-white" style={{ backgroundImage: "url('http://localhost:5000/images/michael-jackson.png')" }}>
+          <div className="relative bg-[url('https://music-player-app-up0l.onrender.com/images/michael-jackson.png')] bg-cover bg-center rounded-lg p-6 text-white" style={{ backgroundImage: "url('https://music-player-app-up0l.onrender.com/images/michael-jackson.png')" }}>
             <div className="absolute inset-0 bg-black opacity-50 rounded-lg"></div>
             <div className="relative z-10 flex items-center">
-              <img src="http://localhost:5000/images/verified.png" alt="verified-badge" className="mr-2" style={{ width: '20px', height: '20px' }} />
+              <img src="https://music-player-app-up0l.onrender.com/images/verified.png" alt="verified-badge" className="mr-2" style={{ width: '20px', height: '20px' }} />
               <span className="text-sm">Verified Artist</span>
             </div>
             <div className="relative z-10 mt-4">
@@ -271,7 +271,7 @@ export default function Widget() {
           {currentSong && (
             <div className="bg-black rounded-md p-4 flex flex-col items-center w-full">
               <div className="text-white mb-2">Now Playing</div>
-              <img src={`http://localhost:5000/${currentSong.coverImage}`} alt={currentSong.title} className="rounded-md mb-2 w-48 h-48" />
+              <img src={`https://music-player-app-up0l.onrender.com/${currentSong.coverImage}`} alt={currentSong.title} className="rounded-md mb-2 w-48 h-48" />
               <div className="text-center">
                 <div className="text-white font-semibold text-lg">{currentSong.title}</div>
                 <div className="text-zinc-400 text-sm">{currentSong.album}</div>
@@ -279,7 +279,7 @@ export default function Widget() {
             </div>
           )}
           <AudioPlayer
-            src={`http://localhost:5000/${currentSong?.audioSrc}`}
+            src={`https://music-player-app-up0l.onrender.com/${currentSong?.audioSrc}`}
             onPlay={() => setIsPlaying(true)}
             onPause={() => setIsPlaying(false)}
             onClickPrevious={handlePrevious}
