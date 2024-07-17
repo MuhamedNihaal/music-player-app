@@ -1,0 +1,16 @@
+services:
+  - name: music-player-backend
+    type: web
+    env: node
+    buildCommand: cd music-player-backend && npm install
+    startCommand: cd music-player-backend && npm start
+    
+
+  - name: music-player-frontend
+    type: web
+    env: static
+    buildCommand: cd music-player-frontend && npm install && npm run build
+    staticPublishPath: music-player-frontend/build
+    envVars:
+      - key: REACT_APP_API_URL
+        value: https://your-backend-url
