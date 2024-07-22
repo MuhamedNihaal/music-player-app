@@ -52,14 +52,14 @@ export default function Widget() {
   const [songs, setSongs] = useState([]);
   const [currentSong, setCurrentSong] = useState(null);
   const audioRef = useRef(new Audio());
-  const [isRepeat, setIsRepeat] = useState(false);
+  // const [isRepeat, setIsRepeat] = useState(false);
   const [isShuffle, setIsShuffle] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [volume, setVolume] = useState(0.5);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
-  const [playbackRate, setPlaybackRate] = useState(1.0);
+  // const [playbackRate, setPlaybackRate] = useState(1.0);
 
   useEffect(() => {
     axios.get('https://music-player-app-backend.onrender.com/songs')
@@ -72,47 +72,64 @@ export default function Widget() {
       .catch(error => console.log(error));
   }, []);
 
-  useEffect(() => {
-    if (currentSong) {
-      const audioSrc = `https://music-player-app-backend.onrender.com/${currentSong.audioSrc}`;
-      axios.get(audioSrc)
-        .then(() => {
-          audioRef.current.src = audioSrc;
-          audioRef.current.currentTime = currentTime;
-          audioRef.current.volume = volume;
-          audioRef.current.playbackRate = playbackRate;
-          if (isPlaying) {
-            audioRef.current.play().catch(error => console.log('Playback error:', error));
-          } else {
-            audioRef.current.pause();
-          }
-        })
-        .catch(error => console.log('Audio source error:', error));
-    }
-  }, [currentSong, isPlaying, currentTime, volume, playbackRate]);
+  // useEffect(() => {
+  //   if (currentSong) {
+  //     const audioSrc = `https://music-player-app-backend.onrender.com/${currentSong.audioSrc}`;
+  //     audioRef.current.src = audioSrc;
+  //     audioRef.current.currentTime = currentTime;
+  //     audioRef.current.volume = volume;
+  //     audioRef.current.playbackRate = playbackRate;
+  //     if (isPlaying) {
+  //       audioRef.current.play().catch(error => console.log('Playback error:', error));
+  //     } else {
+  //       audioRef.current.pause();
+  //     }
+  //   }
+  // }, [currentSong]);
+
+  // useEffect(() => {
+  //   if (audioRef.current) {
+  //     audioRef.current.volume = volume;
+  //   }
+  // }, [volume]);
+
+  // useEffect(() => {
+  //   if (audioRef.current) {
+  //     audioRef.current.playbackRate = playbackRate;
+  //   }
+  // }, [playbackRate]);
+
+  // useEffect(() => {
+  //   if (audioRef.current) {
+  //     if (isPlaying) {
+  //       audioRef.current.play().catch(error => console.log('Playback error:', error));
+  //     } else {
+  //       audioRef.current.pause();
+  //     }
+  //   }
+  // }, [isPlaying]);
 
 
-  useEffect(() => {
-    audioRef.current.addEventListener('timeupdate', handleTimeUpdate);
-    return () => {
-      audioRef.current.removeEventListener('timeupdate', handleTimeUpdate);
-    };
-  }, []);
+  // useEffect(() => {
+  //   audioRef.current.addEventListener('timeupdate', handleTimeUpdate);
+  //   return () => {
+  //     audioRef.current.removeEventListener('timeupdate', handleTimeUpdate);
+  //   };
+  // }, []);
 
 
-  const handleTimeUpdate = useCallback(() => {
-    setCurrentTime(audioRef.current.currentTime);
-    setDuration(audioRef.current.duration);
-  }, []);
+  // const handleTimeUpdate = useCallback(() => {
+  //   setCurrentTime(audioRef.current.currentTime);
+  //   setDuration(audioRef.current.duration);
+  // }, []);
 
-  useEffect(() => {
-    const throttledHandleTimeUpdate = throttle(handleTimeUpdate, 100);
-    audioRef.current.addEventListener('timeupdate', throttledHandleTimeUpdate);
-    return () => {
-      audioRef.current.removeEventListener('timeupdate', throttledHandleTimeUpdate);
-    };
-  }, []);
-
+  // useEffect(() => {
+  //   const throttledHandleTimeUpdate = throttle(handleTimeUpdate, 100);
+  //   audioRef.current.addEventListener('timeupdate', throttledHandleTimeUpdate);
+  //   return () => {
+  //     audioRef.current.removeEventListener('timeupdate', throttledHandleTimeUpdate);
+  //   };
+  // }, [handleTimeUpdate]);
 
   const handlePlay = useCallback((song) => {
     setSongs(prevSongs =>
@@ -164,13 +181,16 @@ export default function Widget() {
     <DndProvider backend={HTML5Backend}>
       <div className="flex h-screen bg-gradient-to-r from-black to-zinc-900 text-white">
         {/* Left Sidebar */}
-        <div className="w-1/5 bg-black p-4 flex flex-col justify-between">
+        <div className="w-1/5 bg-dark-red-gradient p-4 flex flex-col justify-between">
           {/* Branding */}
           <div>
             <div className="flex items-center mb-8">
               <img src="https://music-player-app-backend.onrender.com/images/music.png" alt="DreamMusic Logo" className="mr-2" style={{ width: '40px', height: '40px' }} />
-              <span className="text-xl font-bold">DreamMusic</span>
+              <span className="text-xl font-bold">
+                <span style={{ color: '#f56565' }}>Dream</span>Music
+              </span>
             </div>
+
             {/* Navigation */}
             <nav>
               <ul className="space-y-4">
@@ -267,35 +287,38 @@ export default function Widget() {
           </div>
         </div>
         {/* Now Playing */}
-        <div className="w-1/4 bg-red-800 p-4 flex flex-col items-center">
+        <div className="w-1/5 bg-fading-red p-4 flex flex-col justify-between">
           {currentSong && (
-            <div className="bg-black rounded-md p-4 flex flex-col items-center w-full">
-              <div className="text-white mb-2">Now Playing</div>
-              <img src={`https://music-player-app-backend.onrender.com/${currentSong.coverImage}`} alt={currentSong.title} className="rounded-md mb-2 w-48 h-48" />
-              <div className="text-center">
-                <div className="text-white font-semibold text-lg">{currentSong.title}</div>
-                <div className="text-zinc-400 text-sm">{currentSong.album}</div>
-              </div>
+            <div>
+              <h2 className="text-xl font-bold mb-4">Now Playing</h2>
+              <img
+                src={`https://music-player-app-backend.onrender.com/${currentSong.coverImage}`}
+                alt={currentSong.title}
+                className="w-full h-auto mb-4"
+              />
+              <h3 className="text-lg">{currentSong.title}</h3>
+              <p>{currentSong.artist}</p>
             </div>
           )}
           <AudioPlayer
-            src={`https://music-player-app-backend.onrender.com/${currentSong?.audioSrc}`}
+            ref={audioRef}
+            src={currentSong ? `https://music-player-app-backend.onrender.com/${currentSong.audioSrc}` : ""}
             onPlay={() => setIsPlaying(true)}
             onPause={() => setIsPlaying(false)}
-            onClickPrevious={handlePrevious}
-            onClickNext={handleNext}
-            customAdditionalControls={[]}
-            customVolumeControls={[]}
-            customProgressBarSection={[
-              RHAP_UI.CURRENT_TIME,
-              RHAP_UI.PROGRESS_BAR,
-              RHAP_UI.DURATION,
+            onEnded={handleNext}
+            customControlsSection={[
+              RHAP_UI.MAIN_CONTROLS,
+              RHAP_UI.VOLUME_CONTROLS,
+              RHAP_UI.ADDITIONAL_CONTROLS,
             ]}
-            volume={volume}
+            showSkipControls
+            showJumpControls={false}
+            onClickNext={handleNext}
+            onClickPrevious={handlePrevious}
             onVolumeChange={(e) => setVolume(e.target.volume)}
             onListen={(e) => setCurrentTime(e.target.currentTime)}
-            listenInterval={1000}
-            playbackRate={playbackRate}
+            onLoadedMetadata={(e) => setDuration(e.target.duration)}
+            customAdditionalControls={[]}
           />
         </div>
 
